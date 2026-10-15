@@ -1,6 +1,6 @@
 import React from 'react';
 import { Building2, TrendingUp, GraduationCap, Briefcase, Rocket, ArrowRight, Quote } from 'lucide-react';
-
+import hrTeam from '../assets/images/hr_team_collaboration_1792042394052.jpg'
 interface Props {
   onOpenDemo: () => void;
 }
@@ -127,7 +127,7 @@ export const SolutionsCaseStudiesSection: React.FC<Props> = ({ onOpenDemo }) => 
             {/* Right Side Team Collaboration Photo */}
             <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-lg border border-slate-200">
               <img
-                src="/src/assets/images/hr_team_collaboration_1792042394052.jpg"
+                src={hrTeam}
                 alt="HR team collaborating over hiring shortlist"
                 className="w-full h-64 sm:h-72 object-cover"
                 referrerPolicy="no-referrer"

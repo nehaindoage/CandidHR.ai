@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Globe2, Sparkles, UserPlus, CheckCircle2, ArrowRight } from 'lucide-react';
+import globalTalent from '../assets/images/global_talent_network_1792042392492.jpg'
 
 interface Props {
   onOpenDemo: () => void;
@@ -75,7 +76,7 @@ export const TalentSourcingSection: React.FC<Props> = ({ onOpenDemo }) => {
           <div className="lg:col-span-6 space-y-4">
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 bg-white">
               <img
-                src="/src/assets/images/global_talent_network_1792042392492.jpg"
+                src={globalTalent}
                 alt="Global 3B candidate talent network visualization"
                 className="w-full h-64 sm:h-72 object-cover"
                 referrerPolicy="no-referrer"

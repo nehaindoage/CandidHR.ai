@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import videoInter from '../assets/images/candidate_video_interview_1792042392468.jpg'
 import { 
   LayoutDashboard, 
   FileText, 
@@ -385,7 +386,7 @@ export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeni
                 <div className="lg:col-span-6 bg-[#161C42] border border-white/10 rounded-xl overflow-hidden">
                   <div className="relative aspect-[4/3] bg-black">
                     <img
-                      src="/src/assets/images/candidate_video_interview_1792042392468.jpg"
+                      src={videoInter}
                       alt="Job candidate in automated video interview"
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Play, CheckCircle2, ChevronRight, ShieldCheck } from 'lucide-react';
+import heroImage from "../assets/images/hero_recruiter_leader_1792042392230.jpg";
 
 interface Props {
   onOpenDemo: () => void;
@@ -88,7 +89,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
               {/* Recruiter Hero Image */}
               <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-[#161C42]">
                 <img
-                  src="/src/assets/images/hero_recruiter_leader_1792042392230.jpg"
+                  src={heroImage}
                   alt="Talent acquisition leader using CandidHR.ai platform"
                   className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"

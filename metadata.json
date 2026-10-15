@@ -1,0 +1,6 @@
+{
+  "name": "CandidHR.ai - AI Recruitment & Screening Platform",
+  "description": "AI recruitment platform that automates candidate screening, pre-employment assessments, and video interview scheduling from job creation to final shortlist.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

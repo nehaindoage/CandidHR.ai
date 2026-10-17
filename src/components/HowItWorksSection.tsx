@@ -44,7 +44,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '42%',
       statLabel: 'Outreach response rate',
       badge: 'DeepSearch Active',
-      image: {globalTalent},
+      image: globalTalent,
       tagline: 'Sourcing without recruiter cold outreach'
     },
     {
@@ -61,7 +61,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '60s',
       statLabel: 'Batch screening velocity',
       badge: '94% Match Accuracy',
-      image: {hrTeam},
+      image: hrTeam,
       tagline: 'Zero black-box scores · Clear reasons'
     },
     {
@@ -78,7 +78,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '91%',
       statLabel: 'Assessment completion rate',
       badge: 'Proctor Verified',
-      image: {heroImage},
+      image: heroImage,
       tagline: 'Hands-on benchmarks before live rounds'
     },
     {
@@ -95,7 +95,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '4.8/5',
       statLabel: 'Verbal communication score',
       badge: 'STAR Rubric Scored',
-      image: {videoInter},
+      image: videoInter,
       tagline: 'The first interview without calendar lag'
     },
     {
@@ -112,7 +112,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '3 hrs',
       statLabel: 'From applications to hire-ready',
       badge: 'Shortlist Verified',
-      image: {heroImage},
+      image: heroImage,
       tagline: 'Unified 360 score · People decide'
     }
   ];

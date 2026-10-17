@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AnnouncementBar } from './components/AnnouncementBar';
+// import { AnnouncementBar } from './components/AnnouncementBar';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TransitionVeil } from './components/TransitionVeil';
@@ -38,7 +38,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0E1330] flex flex-col font-sans">
       {/* Top Announcement Bar */}
-      <AnnouncementBar onOpenDemo={handleOpenDemo} />
+      {/* <AnnouncementBar onOpenDemo={handleOpenDemo} /> */}
 
       {/* Primary Sticky Navbar */}
       <Navbar

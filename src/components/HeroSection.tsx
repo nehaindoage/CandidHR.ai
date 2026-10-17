@@ -1,6 +1,5 @@
-import React from 'react';
-import { ArrowRight, Play, CheckCircle2, ChevronRight, ShieldCheck } from 'lucide-react';
-import heroImage from "../assets/images/hero_recruiter_leader_1792042392230.jpg";
+import React, { useState } from 'react';
+import { ArrowRight, Play, CheckCircle2, ChevronRight, ShieldCheck, Building2 } from 'lucide-react';
 
 interface Props {
   onOpenDemo: () => void;
@@ -8,21 +7,83 @@ interface Props {
 }
 
 export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimulator }) => {
+  // Client logos provided from CloudFront CDN
   const clientLogos = [
-    'Lumiverse Solutions',
-    'Forech India',
-    'Panchsheel Filters',
-    'QubeHealth Pay',
-    'Vikas Group',
-    'Monitra Healthcare',
-    'Padmini Industries',
-    'Wings Biotech',
-    'KBP Engineering',
-    'GloLicense Solutions'
+    {
+      name: 'Ross Warner Hr Solutions',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3K0O2uCF83GKjpMf3EdLoIvse4M/logo/ross-warner.png'
+    },
+    {
+      name: 'Vikas Group',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3HGXv7F104FiNp5F2WV7nIrXt6A/logo/vikas-group_logo.png'
+    },
+    {
+      name: 'Wings Biotech LLP',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3JUcWa5q4fQ2CNAduH5cIJODzPa/logo/wings-bbiotech-logos.jpg'
+    },
+    {
+      name: 'Zenithive',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3HPB8KS0lzLJ03OcWtWxcqtDPRi/logo/zenithhive.png'
+    },
+    {
+      name: 'Lumiverse Solutions',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/2yVjU2itZfPyZI1OC6ckiHfG8pc/logo/lumiverse-logo.webp'
+    },
+    {
+      name: 'Forech India Pvt. Ltd',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3ILlG6KcdmY6XvOwkDMj2EFDDHf/logo/forech-logo.png'
+    },
+    {
+      name: 'PANCHSHEEL FILTERS PVT LTD',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3J5kAWPAANdWzSFPyDlJgkRj36S/logo/pf-logo_73MPWM0.png'
+    },
+    {
+      name: 'QubeHealth Pay',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3FwvyINpCGp8cIFNorfoTCqJYC9/logo/qubehealth-logo.jpg'
+    },
+    {
+      name: 'Padmini Industries Limited',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3JRy7fNdDCqbsIzFl2b0HCEiWp8/logo/padmini_1503x351.png'
+    },
+    {
+      name: 'GloLicense Solutions',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3JoFN6gln0xsZTL9lpeEzfMNo4z/logo/glolicense_minimal_whitespace.png'
+    },
+    {
+      name: 'Monitra Healthcare',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3Jo95IGd54F5MLR276CryUamJkc/logo/monitrahealt-logo.png'
+    },
+    {
+      name: 'KBP Engineering Services',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3JjPPnRW5MM7YDBIfloIur92WUy/logo/kbp_logo.png'
+    },
+    {
+      name: 'HireFusions',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3Kj008N1sOrrXqzVz8EZ43ZtwFI/logo/hirefusions.png'
+    },
+    {
+      name: 'Barbowws',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3Fu8Y8GtzQJcwPSXBVsUdypiHiQ/logo/barbowws-logo-v19.png'
+    },
+    {
+      name: 'Diacto Technologies',
+      src: 'https://dersjb4x67dvf.cloudfront.net/org_logo/diacto.ico'
+    },
+    {
+      name: 'ZenZ Innovation',
+      src: 'https://dersjb4x67dvf.cloudfront.net/tenants/3CbpnESBtZNc5TNtvgGWI2KJEiv/logo/zenz-innovation.png'
+    }
   ];
 
+  // State to track image fallback if CDN fails
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (name: string) => {
+    setFailedImages(prev => ({ ...prev, [name]: true }));
+  };
+
   return (
-    <section className="relative bg-navy-glow pt-10 pb-12 overflow-hidden text-slate-100">
+    <section className="relative bg-navy-glow pt-10 pb-14 overflow-hidden text-slate-100">
       {/* Decorative ambient blurred gradients */}
       <div className="absolute top-1/4 right-5 w-96 h-96 bg-[#6C5CFF]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-5 w-80 h-80 bg-[#3D38F5]/15 rounded-full blur-3xl pointer-events-none" />
@@ -65,13 +126,13 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              {/* <button
+              <button
                 onClick={onOpenScreeningSimulator}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/20 rounded-xl transition-all cursor-pointer whitespace-nowrap"
               >
                 <Play className="w-4 h-4 text-[#9F96FF]" />
                 <span>Test AI Screening Live</span>
-              </button> */}
+              </button>
             </div>
 
             {/* Micro Trust Note */}
@@ -89,7 +150,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
               {/* Recruiter Hero Image */}
               <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-[#161C42]">
                 <img
-                  src={heroImage}
+                  src="/src/assets/images/hero_recruiter_leader_1792042392230.jpg"
                   alt="Talent acquisition leader using CandidHR.ai platform"
                   className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"
@@ -163,21 +224,45 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
 
         </div>
 
-        {/* Compact Logo Marquee Ribbon (Zero Waste Height) */}
-        <div className="mt-14 pt-6 border-t border-white/10">
-          <p className="text-center text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3 font-mono">
+        {/* =========================================================================
+            CLIENT-REQUESTED LOGO MARQUEE: WHITE RECTANGULAR CARDS ON DARK BACKDROP
+            Exact card style from Capture.PNG and user's specifications:
+            - White rounded card with border border-white/20
+            - Fixed dimensions ~210px x 115px
+            - Official logo centered with max-h-[75px] max-w-[180px] object-contain
+            - Smooth infinite loop marquee with hover-pause
+           ========================================================================= */}
+        <div className="mt-16 pt-8 border-t border-white/10">
+          <p className="text-center text-xs font-bold uppercase tracking-wider text-slate-300 mb-6 font-mono">
             Trusted by hiring teams and talent recruiters at
           </p>
           
-          <div className="relative overflow-hidden w-full py-1 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="animate-marquee-scroll flex items-center gap-8 text-slate-400 text-sm font-heading font-bold whitespace-nowrap">
+          <div className="relative overflow-hidden w-full py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+            <div className="animate-marquee-scroll flex items-center gap-6 whitespace-nowrap">
               {/* Double sequence for infinite seamless loop */}
-              {clientLogos.concat(clientLogos).map((name, i) => (
-                <div key={`${name}-${i}`} className="flex items-center gap-8 shrink-0">
-                  <span className="hover:text-white transition-colors cursor-default tracking-tight">
-                    {name}
-                  </span>
-                  <span className="text-white/20 select-none">/</span>
+              {clientLogos.concat(clientLogos).map((logo, i) => (
+                <div
+                  key={`${logo.name}-${i}`}
+                  className="flex-shrink-0 flex items-center justify-center rounded-2xl bg-white border border-white/20 shadow-sm transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 p-3 sm:p-4 select-none"
+                  style={{ width: '220px', height: '115px' }}
+                  title={logo.name}
+                >
+                  {failedImages[logo.name] ? (
+                    <div className="flex items-center gap-2 text-slate-800 text-xs font-heading font-extrabold text-center px-2">
+                      <Building2 className="w-5 h-5 text-[#3D38F5] shrink-0" />
+                      <span className="line-clamp-2 leading-tight">{logo.name}</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      title={logo.name}
+                      onError={() => handleImageError(logo.name)}
+                      className="max-h-[75px] max-w-[180px] w-auto h-auto object-contain"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
               ))}
             </div>

@@ -16,6 +16,10 @@ import {
   CheckCircle2,
   Play
 } from 'lucide-react';
+import heroImage from "../assets/images/hero_recruiter_leader_1792042392230.jpg";
+import videoInter from '../assets/images/candidate_video_interview_1792042392468.jpg'
+import globalTalent from '../assets/images/global_talent_network_1792042392492.jpg'
+import hrTeam from '../assets/images/hr_team_collaboration_1792042394052.jpg'
 
 interface Props {
   onOpenDemo: () => void;
@@ -57,7 +61,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '60s',
       statLabel: 'Batch screening velocity',
       badge: '94% Match Accuracy',
-      image: '/src/assets/images/hero_recruiter_leader_1792042392230.jpg',
+      image: {globalTalent},
       tagline: 'Zero black-box scores · Clear reasons'
     },
     {
@@ -74,7 +78,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '91%',
       statLabel: 'Assessment completion rate',
       badge: 'Proctor Verified',
-      image: '/src/assets/images/hr_team_collaboration_1792042394052.jpg',
+      image: {heroImage},
       tagline: 'Hands-on benchmarks before live rounds'
     },
     {
@@ -91,7 +95,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '4.8/5',
       statLabel: 'Verbal communication score',
       badge: 'STAR Rubric Scored',
-      image: '/src/assets/images/candidate_video_interview_1792042392468.jpg',
+      image: {videoInter},
       tagline: 'The first interview without calendar lag'
     },
     {
@@ -108,7 +112,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '3 hrs',
       statLabel: 'From applications to hire-ready',
       badge: 'Shortlist Verified',
-      image: '/src/assets/images/hero_recruiter_leader_1792042392230.jpg',
+      image: {heroImage},
       tagline: 'Unified 360 score · People decide'
     }
   ];

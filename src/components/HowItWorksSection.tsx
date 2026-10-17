@@ -9,8 +9,12 @@ import {
   ArrowRight, 
   Check, 
   X,
-  Bot,
-  UserCheck
+  UserCheck,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+  CheckCircle2,
+  Play
 } from 'lucide-react';
 
 interface Props {
@@ -18,66 +22,110 @@ interface Props {
 }
 
 export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
-  const [activeStage, setActiveStage] = useState<number>(0);
+  // Default to Stage 05 (Shortlist) or Stage 01
+  const [expandedIndex, setExpandedIndex] = useState<number>(4);
 
   const stages = [
     {
-      step: '01',
-      title: 'Source',
-      subtitle: 'Bring the right candidates to the job',
-      description: 'Create a job in seconds with an AI-written description. CandidHR.ai automatically invites the best-matched profiles from a 3B talent pool alongside active job board applicants.',
-      actor: 'AI Automated',
-      icon: Users,
-      chips: ['Jobs in seconds', 'AI job descriptions', 'Auto-invite matches', '3B talent pool', 'Deep Search', 'Job portals'],
-      keyTakeaway: 'Stop waiting for candidates to find you — invite top matches immediately.'
+      id: 0,
+      stageNumber: '01',
+      stageName: 'Source',
+      company: 'GloLicense Solutions',
+      logoText: 'GloLicense',
+      headline: 'GloLicense and CandidHR.ai auto-invite best matches from a 3B talent pool',
+      quote: '“We invited 50 pre-matched engineers across 3 continents before receiving our first organic application. CandidHR’s DeepSearch initialized our entire engineering pipeline in under 24 hours.”',
+      author: 'Pooja Patvekar',
+      authorRole: 'Head of Talent Acquisition, GloLicense Solutions',
+      metric: '3B+ Global Talent Indexed',
+      statNumber: '42%',
+      statLabel: 'Outreach response rate',
+      badge: 'DeepSearch Active',
+      image: '/src/assets/images/global_talent_network_1792042392492.jpg',
+      tagline: 'Sourcing without recruiter cold outreach'
     },
     {
-      step: '02',
-      title: 'Screen',
-      subtitle: 'Match candidates to the job, not just keywords',
-      description: 'Every resume is parsed and evaluated against your exact role criteria — required skills, years of experience, domain knowledge, and deal-breaker questions.',
-      actor: 'AI Automated',
-      icon: FileSearch,
-      chips: ['Resume screening & ranking', 'Bulk resume upload', 'AI JD matching', 'Reason-backed match score', 'Red-flag detection'],
-      keyTakeaway: 'No black-box scoring. Every candidate match explains why they fit.'
+      id: 1,
+      stageNumber: '02',
+      stageName: 'Screen',
+      company: 'Forech India',
+      logoText: 'Forech',
+      headline: 'Forech eliminates manual screening fatigue with precision resume matching',
+      quote: '“Every candidate match shows the exact reasons and gaps against our criteria. Our recruiters stopped opening 500 PDFs by hand and stopped second-guessing qualifications.”',
+      author: 'Rajesh Verma',
+      authorRole: 'VP of Human Resources, Forech India',
+      metric: '1,200+ Resumes Evaluated',
+      statNumber: '60s',
+      statLabel: 'Batch screening velocity',
+      badge: '94% Match Accuracy',
+      image: '/src/assets/images/hero_recruiter_leader_1792042392230.jpg',
+      tagline: 'Zero black-box scores · Clear reasons'
     },
     {
-      step: '03',
-      title: 'Assess',
-      subtitle: 'Test what the resume can’t prove',
-      description: 'Candidates who pass initial screening take role-relevant assessments on their own schedule. Supported tests include coding, domain skills, aptitude, and communication with AI proctoring.',
-      actor: 'AI Automated',
-      icon: CheckSquare,
-      chips: ['Technical & coding tests', 'Aptitude tests', 'Domain skills', 'AI proctoring', 'Instant auto-scoring'],
-      keyTakeaway: 'A resume tells you what they claim. An assessment proves what they can do.'
+      id: 2,
+      stageNumber: '03',
+      stageName: 'Assess',
+      company: 'Vikas Group',
+      logoText: 'Vikas Group',
+      headline: 'Vikas Group benchmarks technical aptitude with AI-proctored coding tests',
+      quote: '“A resume tells you what candidates claim. The proctored coding and domain benchmarks proved what they could build before our engineering managers booked a single interview.”',
+      author: 'Sunil Kulkarni',
+      authorRole: 'Director of Engineering, Vikas Group',
+      metric: '100% Proctored Integrity',
+      statNumber: '91%',
+      statLabel: 'Assessment completion rate',
+      badge: 'Proctor Verified',
+      image: '/src/assets/images/hr_team_collaboration_1792042394052.jpg',
+      tagline: 'Hands-on benchmarks before live rounds'
     },
     {
-      step: '04',
-      title: 'Interview',
-      subtitle: 'Automated video interviews on their schedule',
-      description: 'Candidates record answers to role-specific questions. CandidHR.ai transcribes each response, scores communication and relevance, and provides an AI hiring recommendation.',
-      actor: 'AI Automated',
-      icon: Video,
-      chips: ['Self-paced video interview', 'Red-flag questions', 'Real-time transcription', 'Communication & logic score', 'AI recommendation'],
-      keyTakeaway: 'The first round happens 24/7 without recruiter calendar gymnastics.'
+      id: 3,
+      stageNumber: '04',
+      stageName: 'Interview',
+      company: 'QubeHealth Pay',
+      logoText: 'QubeHealth',
+      headline: 'QubeHealth accelerates hiring velocity with 24/7 automated video interviews',
+      quote: '“Candidates record answers when it suits their schedule. Our talent team reviews structured transcripts, communication scores, and hiring verdicts with zero calendar coordination lag.”',
+      author: 'Neha Singhania',
+      authorRole: 'Lead Talent Partner, QubeHealth Pay',
+      metric: '24/7 Candidate Self-Paced',
+      statNumber: '4.8/5',
+      statLabel: 'Verbal communication score',
+      badge: 'STAR Rubric Scored',
+      image: '/src/assets/images/candidate_video_interview_1792042392468.jpg',
+      tagline: 'The first interview without calendar lag'
     },
     {
-      step: '05',
-      title: 'Shortlist',
-      subtitle: 'One ranked view with complete evidence',
-      description: 'Resume fit, assessment test scores, and video interview analysis merge into a unified candidate ranking. Recruiters and hiring managers review the top 10 and make the hire.',
-      actor: 'Your Team Decides',
-      icon: Award,
-      chips: ['Ranked shortlist', 'Candidate 360 profile', 'Shareable hiring manager links', 'Interview scheduling', 'ATS export'],
-      keyTakeaway: 'AI does the heavy evaluation. Your team spends time on final-round conversations.'
+      id: 4,
+      stageNumber: '05',
+      stageName: 'Shortlist',
+      company: 'Lumiverse Solutions',
+      logoText: 'Lumiverse',
+      headline: 'Lumiverse screened 360 interviews and delivered 25 qualified hires in 3 hours',
+      quote: '“CandidHR delivered our top 25 pre-qualified candidates in just 3 hours. Our managers sat down only with people who were truly hire-ready, completely eliminating preliminary screening noise.”',
+      author: 'Amar Thakare',
+      authorRole: 'CEO & Managing Director, Lumiverse Solutions',
+      metric: '360 Interviews Completed',
+      statNumber: '3 hrs',
+      statLabel: 'From applications to hire-ready',
+      badge: 'Shortlist Verified',
+      image: '/src/assets/images/hero_recruiter_leader_1792042392230.jpg',
+      tagline: 'Unified 360 score · People decide'
     }
   ];
+
+  const handleNext = () => {
+    setExpandedIndex((prev) => (prev + 1) % stages.length);
+  };
+
+  const handlePrev = () => {
+    setExpandedIndex((prev) => (prev - 1 + stages.length) % stages.length);
+  };
 
   return (
     <section id="how-it-works" className="bg-[#F6F7FB] text-slate-900 py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
+        {/* Top Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-[#3D38F5] bg-[#EEEDFF] px-3 py-1 rounded-full">
             How It All Works Together
@@ -174,190 +222,285 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
 
         </div>
 
-        {/* Interactive 5-Stage Step Showcase */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+        {/* =========================================================================
+            ZOOM-STYLE INTERACTIVE ACCORDION SLIDER CAROUSEL
+            Exact layout matching Zoom.com customer stories:
+            - Multiple vertical cards side-by-side
+            - 1 card is expanded wide with quote, metrics, author, CTA and image
+            - Other cards are collapsed vertical slivers with company/logo
+            - Smooth glide animation on click!
+           ========================================================================= */}
+        <div className="space-y-6">
+          
+          {/* Zoom Section Header & Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-[#3D38F5] tracking-wider uppercase">Interactive Pipeline</span>
-              <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-[#0E1330] mt-0.5">
-                5 Stages from Job Creation to Shortlist
+              <span className="text-xs font-bold uppercase tracking-wider text-[#3D38F5] font-mono">
+                Interactive Pipeline &amp; Customer Shortlists
+              </span>
+              <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#0E1330] mt-1 tracking-tight">
+                Recruiters achieve more with <span className="text-brand-gradient">CandidHR.ai</span>
               </h3>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                Click any stage to expand the full customer outcome and workflow evidence.
+              </p>
             </div>
-            <button
-              onClick={onOpenDemo}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3D38F5] hover:text-[#2D28D6] bg-[#EEEDFF] hover:bg-[#D9D6FF] px-3.5 py-2 rounded-xl transition-colors cursor-pointer self-start sm:self-auto"
-            >
-              <span>See Demo on Your Jobs</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+
+            {/* Circular Carousel Arrow Controls (Zoom Signature) */}
+            <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+              <button
+                onClick={handlePrev}
+                className="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 flex items-center justify-center transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                aria-label="Previous story"
+                title="Previous stage"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 flex items-center justify-center transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                aria-label="Next story"
+                title="Next stage"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
-          {/* Stage Tabs Navigation */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-6">
+          {/* Zoom Horizontal Expanding Accordion Container (Desktop & Tablet) */}
+          <div className="hidden md:flex gap-3.5 h-[560px] w-full select-none">
             {stages.map((stage, idx) => {
-              const Icon = stage.icon;
-              const isActive = activeStage === idx;
+              const isExpanded = expandedIndex === idx;
+
               return (
-                <button
-                  key={stage.step}
-                  onClick={() => setActiveStage(idx)}
-                  className={`flex flex-col items-start p-3.5 rounded-xl border transition-all text-left cursor-pointer ${
-                    isActive
-                      ? 'bg-[#0E1330] text-white border-[#0E1330] shadow-md shadow-slate-900/10'
-                      : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+                <div
+                  key={stage.id}
+                  onClick={() => setExpandedIndex(idx)}
+                  className={`relative rounded-3xl transition-all duration-500 ease-in-out cursor-pointer overflow-hidden border ${
+                    isExpanded
+                      ? 'flex-[5] bg-white border-slate-300 shadow-xl cursor-default'
+                      : 'flex-1 bg-[#F0F2F8] hover:bg-[#E8EBF5] border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <div className="flex items-center justify-between w-full mb-2">
-                    <span className={`text-xs font-mono font-bold ${isActive ? 'text-[#9F96FF]' : 'text-slate-400'}`}>
-                      {stage.step}
-                    </span>
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#4ADE9E]' : 'text-[#3D38F5]'}`} />
-                  </div>
-                  <span className="font-heading font-bold text-sm">{stage.title}</span>
-                </button>
+                  {/* COLLAPSED STATE SLIVER (Zoom Style) */}
+                  {!isExpanded && (
+                    <div className="h-full w-full flex flex-col justify-between items-center p-4 py-8">
+                      {/* Top Stage Indicator */}
+                      <div className="w-8 h-8 rounded-full bg-white text-[#3D38F5] border border-slate-200 flex items-center justify-center font-heading font-extrabold text-xs shadow-2xs">
+                        {stage.stageNumber}
+                      </div>
+
+                      {/* Top Preview Image Thumbnail */}
+                      <div className="w-14 h-14 rounded-2xl overflow-hidden shadow-2xs border border-white">
+                        <img
+                          src={stage.image}
+                          alt={stage.company}
+                          className="w-full h-full object-cover grayscale opacity-75"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+
+                      {/* Vertical Company / Stage Label */}
+                      <div className="flex flex-col items-center gap-2 my-auto">
+                        <span 
+                          className="text-xs font-heading font-extrabold text-[#0E1330] tracking-wider uppercase whitespace-nowrap rotate-180" 
+                          style={{ writingMode: 'vertical-rl' }}
+                        >
+                          {stage.company}
+                        </span>
+                      </div>
+
+                      {/* Bottom Stage Tag */}
+                      <span className="text-[10px] font-mono font-bold text-slate-500 tracking-wider uppercase">
+                        {stage.stageName}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* EXPANDED STATE (Zoom Full Layout) */}
+                  {isExpanded && (
+                    <div className="h-full w-full p-8 lg:p-10 flex flex-col justify-between overflow-hidden">
+                      
+                      {/* Top Headline & Company Lockup */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2.5">
+                            <span className="px-2.5 py-1 rounded-full bg-[#EEEDFF] text-[#3D38F5] text-xs font-extrabold font-mono">
+                              STAGE {stage.stageNumber} · {stage.stageName.toUpperCase()}
+                            </span>
+                            <span className="text-xs font-bold text-slate-600">
+                              {stage.company}
+                            </span>
+                          </div>
+
+                          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#E3F8F1] text-[#0A7F5D]">
+                            {stage.badge}
+                          </span>
+                        </div>
+
+                        {/* Bold Zoom Headline */}
+                        <h4 className="font-heading font-extrabold text-2xl lg:text-[28px] leading-[1.2] text-[#0E1330] tracking-tight">
+                          {stage.headline}
+                        </h4>
+                      </div>
+
+                      {/* Middle: Split Layout (Left: Quote + Author, Right: Image Visual) */}
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-4">
+                        
+                        {/* Quote & Author */}
+                        <div className="lg:col-span-7 space-y-4">
+                          <blockquote className="text-sm lg:text-base text-slate-700 leading-relaxed italic border-l-2 border-[#3D38F5] pl-4">
+                            {stage.quote}
+                          </blockquote>
+
+                          <div>
+                            <div className="font-heading font-bold text-sm text-[#0E1330]">
+                              {stage.author}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              {stage.authorRole}
+                            </div>
+                          </div>
+
+                          {/* Stat Highlight Strip */}
+                          <div className="flex items-center gap-6 pt-2 border-t border-slate-100">
+                            <div>
+                              <span className="font-heading font-extrabold text-2xl text-[#3D38F5] block">
+                                {stage.statNumber}
+                              </span>
+                              <span className="text-[11px] text-slate-500 font-medium">
+                                {stage.statLabel}
+                              </span>
+                            </div>
+                            <div className="border-l border-slate-200 pl-6">
+                              <span className="text-xs font-bold text-[#0E1330] block">
+                                Key Capability
+                              </span>
+                              <span className="text-[11px] text-slate-500 font-medium">
+                                {stage.tagline}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right: Media Showcase */}
+                        <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-[#0E1330] border border-slate-200">
+                          <img
+                            src={stage.image}
+                            alt={stage.company}
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0E1330]/80 via-transparent to-transparent" />
+                          <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between text-xs">
+                            <span className="font-medium text-[11px] truncate max-w-[200px]">
+                              {stage.metric}
+                            </span>
+                            <span className="w-2 h-2 rounded-full bg-[#12B886]" />
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Bottom Bar: Action Button + Stage Progress Indicator */}
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <button
+                          onClick={onOpenDemo}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-gradient hover:bg-brand-gradient-hover text-white text-xs font-bold shadow-md shadow-[#3D38F5]/30 transition-all cursor-pointer"
+                        >
+                          <span>Explore {stage.stageName} Shortlist Workflow</span>
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                            <ArrowRight className="w-3.5 h-3.5 text-white" />
+                          </div>
+                        </button>
+
+                        <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-400">
+                          <span>{stage.stageNumber}</span>
+                          <span>/</span>
+                          <span>05</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
 
-          {/* Active Stage Detail Panel */}
-          <div className="mt-8 bg-[#F6F7FB] border border-slate-200 rounded-2xl p-6 sm:p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-7 space-y-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#3D38F5] text-white">
-                    Step {stages[activeStage].step}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">
-                    {stages[activeStage].actor}
-                  </span>
-                </div>
-
-                <h4 className="font-heading font-extrabold text-xl sm:text-2xl text-[#0E1330]">
-                  {stages[activeStage].subtitle}
-                </h4>
-
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  {stages[activeStage].description}
-                </p>
-
-                {/* Capability Chips */}
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-600 block mb-2">
-                    Included capabilities
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {stages[activeStage].chips.map((chip) => (
-                      <span
-                        key={chip}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-2xs"
-                      >
-                        <Check className="w-3.5 h-3.5 text-[#12B886]" />
-                        {chip}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-2 text-xs font-semibold text-[#0A7F5D] flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#12B886]" />
-                  <span>{stages[activeStage].keyTakeaway}</span>
-                </div>
-              </div>
-
-              {/* Right Side Stage Visual Card */}
-              <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <span className="text-xs font-bold text-slate-600 uppercase font-mono">Stage Preview</span>
-                  <span className="text-xs font-semibold text-[#12B886] bg-[#E3F8F1] px-2 py-0.5 rounded-full">Active</span>
-                </div>
-
-                {activeStage === 0 && (
-                  <div className="space-y-3 text-xs">
-                    <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                      <div className="text-slate-500">Target Role</div>
-                      <div className="font-bold text-slate-900 text-sm">Senior Data Engineer</div>
-                      <div className="text-slate-500 mt-1">Location: Bengaluru · Remote Eligible</div>
-                    </div>
-                    <div className="p-3 bg-[#EEEDFF] border border-[#6C5CFF]/30 rounded-lg">
-                      <div className="font-bold text-[#3D38F5]">Auto-Invite Active</div>
-                      <div className="text-slate-700 mt-0.5">Inviting top 50 matches from 3B global candidates.</div>
-                    </div>
-                  </div>
-                )}
-
-                {activeStage === 1 && (
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between font-bold text-slate-800">
-                      <span>Resume Screening Progress</span>
-                      <span>412 / 500 screened</span>
-                    </div>
-                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                      <div className="bg-[#3D38F5] h-full rounded-full w-[82%]" />
-                    </div>
-                    <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 mt-2">
-                      <div className="font-bold">Deal-breaker Check: Passed</div>
-                      <div>Required 5+ yrs B2B and enterprise accounts verified.</div>
-                    </div>
-                  </div>
-                )}
-
-                {activeStage === 2 && (
-                  <div className="space-y-2 text-xs">
-                    <div className="font-bold text-slate-800 mb-2">Automated Skill Scores</div>
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between"><span>Python Data Engineering</span><span className="font-bold">91%</span></div>
-                      <div className="flex justify-between"><span>SQL &amp; Query Optimization</span><span className="font-bold">88%</span></div>
-                      <div className="flex justify-between"><span>Data Modeling &amp; Architecture</span><span className="font-bold">82%</span></div>
-                    </div>
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[#0A7F5D] font-medium">
-                      <span>AI Proctoring: Verified</span>
-                      <Check className="w-4 h-4" />
-                    </div>
-                  </div>
-                )}
-
-                {activeStage === 3 && (
-                  <div className="space-y-2 text-xs">
-                    <div className="p-2.5 bg-[#0E1330] text-white rounded-lg">
-                      <span className="text-[10px] text-[#A9A6FF] font-mono block">Video Interview Question</span>
-                      <p className="font-medium text-xs mt-0.5 italic">“Tell us about a time you optimized a critical failing pipeline.”</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-center pt-1">
-                      <div className="p-2 bg-slate-50 border border-slate-200 rounded-lg">
-                        <span className="text-[10px] text-slate-500 block">Communication</span>
-                        <span className="font-bold text-slate-800">4.7 / 5</span>
-                      </div>
-                      <div className="p-2 bg-slate-50 border border-slate-200 rounded-lg">
-                        <span className="text-[10px] text-slate-500 block">Answer Structure</span>
-                        <span className="font-bold text-slate-800">Strong (STAR)</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeStage === 4 && (
-                  <div className="space-y-2 text-xs">
-                    <div className="p-3 bg-white border-2 border-[#12B886] rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-slate-900 text-sm">#1 Rhea Kapoor</span>
-                        <span className="text-xs font-bold text-[#12B886] bg-[#E3F8F1] px-2 py-0.5 rounded">96% Match</span>
-                      </div>
-                      <p className="text-slate-600 text-xs mt-1">Recommended for final recruiter conversation.</p>
-                      <button
-                        onClick={onOpenDemo}
-                        className="mt-2 w-full py-1.5 bg-[#0E1330] text-white rounded-md font-bold text-xs hover:bg-[#3D38F5] transition-colors"
-                      >
-                        Schedule Interview
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-              </div>
-
+          {/* MOBILE VIEW (Clean Stacked / Tabbed Layout) */}
+          <div className="md:hidden space-y-4">
+            
+            {/* Stage Selector Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 no-scrollbar">
+              {stages.map((st, i) => (
+                <button
+                  key={st.id}
+                  onClick={() => setExpandedIndex(i)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border ${
+                    expandedIndex === i
+                      ? 'bg-[#0E1330] text-white border-[#0E1330]'
+                      : 'bg-white text-slate-700 border-slate-200'
+                  }`}
+                >
+                  {st.stageNumber}. {st.stageName}
+                </button>
+              ))}
             </div>
+
+            {/* Active Mobile Card */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-md space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#EEEDFF] text-[#3D38F5] text-[11px] font-extrabold font-mono">
+                  STAGE {stages[expandedIndex].stageNumber} · {stages[expandedIndex].stageName.toUpperCase()}
+                </span>
+                <span className="text-xs font-bold text-slate-500">
+                  {stages[expandedIndex].company}
+                </span>
+              </div>
+
+              <h4 className="font-heading font-extrabold text-lg text-[#0E1330]">
+                {stages[expandedIndex].headline}
+              </h4>
+
+              <div className="relative rounded-xl overflow-hidden aspect-[16/9]">
+                <img
+                  src={stages[expandedIndex].image}
+                  alt={stages[expandedIndex].company}
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              <blockquote className="text-xs text-slate-600 leading-relaxed italic border-l-2 border-[#3D38F5] pl-3">
+                {stages[expandedIndex].quote}
+              </blockquote>
+
+              <div className="text-xs">
+                <div className="font-bold text-[#0E1330]">{stages[expandedIndex].author}</div>
+                <div className="text-slate-500 text-[11px]">{stages[expandedIndex].authorRole}</div>
+              </div>
+
+              <div className="pt-2 flex justify-between items-center border-t border-slate-100">
+                <div>
+                  <span className="font-heading font-extrabold text-xl text-[#3D38F5] block">
+                    {stages[expandedIndex].statNumber}
+                  </span>
+                  <span className="text-[10px] text-slate-500">{stages[expandedIndex].statLabel}</span>
+                </div>
+
+                <button
+                  onClick={onOpenDemo}
+                  className="px-4 py-2 bg-brand-gradient text-white rounded-xl text-xs font-bold flex items-center gap-1.5"
+                >
+                  <span>See Demo</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+
           </div>
+
         </div>
 
       </div>

@@ -44,7 +44,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '42%',
       statLabel: 'Outreach response rate',
       badge: 'DeepSearch Active',
-      image: '/src/assets/images/global_talent_network_1792042392492.jpg',
+      image: {globalTalent},
       tagline: 'Sourcing without recruiter cold outreach'
     },
     {
@@ -61,7 +61,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
       statNumber: '60s',
       statLabel: 'Batch screening velocity',
       badge: '94% Match Accuracy',
-      image: {globalTalent},
+      image: {hrTeam},
       tagline: 'Zero black-box scores · Clear reasons'
     },
     {

@@ -126,13 +126,13 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <button
+              {/* <button
                 onClick={onOpenScreeningSimulator}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/20 rounded-xl transition-all cursor-pointer whitespace-nowrap"
               >
                 <Play className="w-4 h-4 text-[#9F96FF]" />
                 <span>Test AI Screening Live</span>
-              </button>
+              </button> */}
             </div>
 
             {/* Micro Trust Note */}

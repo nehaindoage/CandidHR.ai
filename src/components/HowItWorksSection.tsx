@@ -29,6 +29,10 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
   // Default to Stage 05 (Shortlist) or Stage 01
   const [expandedIndex, setExpandedIndex] = useState<number>(4);
 
+  const handleExpand = (idx: number) => {
+    setExpandedIndex(idx);
+  };
+
   const stages = [
     {
       id: 0,
@@ -279,7 +283,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
               return (
                 <div
                   key={stage.id}
-                  onClick={() => setExpandedIndex(idx)}
+                  onClick={() => handleExpand(idx)}
                   className={`relative rounded-3xl transition-all duration-500 ease-in-out cursor-pointer overflow-hidden border ${
                     isExpanded
                       ? 'flex-[5] bg-white border-slate-300 shadow-xl cursor-default'
@@ -440,7 +444,7 @@ export const HowItWorksSection: React.FC<Props> = ({ onOpenDemo }) => {
               {stages.map((st, i) => (
                 <button
                   key={st.id}
-                  onClick={() => setExpandedIndex(i)}
+                  onClick={() => handleExpand(i)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border ${
                     expandedIndex === i
                       ? 'bg-[#0E1330] text-white border-[#0E1330]'

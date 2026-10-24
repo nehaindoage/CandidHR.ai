@@ -25,6 +25,10 @@ interface Props {
 export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimulator }) => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'create_job' | 'workflows' | 'candidate_view'>('dashboard');
 
+  const handleTabChange = (tab: 'dashboard' | 'create_job' | 'workflows' | 'candidate_view') => {
+    setActiveTab(tab);
+  };
+
   return (
     <section id="walkthrough" className="bg-white py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
       <div className="max-w-7xl mx-auto">
@@ -45,7 +49,7 @@ export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeni
         {/* Tab Controls Bar */}
         <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 gap-2 no-scrollbar">
           <button
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => handleTabChange('dashboard')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'dashboard'
                 ? 'bg-[#0E1330] text-white shadow-md'
@@ -57,7 +61,7 @@ export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeni
           </button>
 
           <button
-            onClick={() => setActiveTab('create_job')}
+            onClick={() => handleTabChange('create_job')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'create_job'
                 ? 'bg-[#0E1330] text-white shadow-md'
@@ -69,7 +73,7 @@ export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeni
           </button>
 
           <button
-            onClick={() => setActiveTab('workflows')}
+            onClick={() => handleTabChange('workflows')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'workflows'
                 ? 'bg-[#0E1330] text-white shadow-md'
@@ -81,7 +85,7 @@ export const PlatformWalkthrough: React.FC<Props> = ({ onOpenDemo, onOpenScreeni
           </button>
 
           <button
-            onClick={() => setActiveTab('candidate_view')}
+            onClick={() => handleTabChange('candidate_view')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'candidate_view'
                 ? 'bg-[#0E1330] text-white shadow-md'

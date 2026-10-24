@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Play, Calendar } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
 import logo from "../assets/images/logo_HR.png";
 
 interface Props {
@@ -15,10 +15,11 @@ export const Navbar: React.FC<Props> = ({
 
   const navLinks = [
     { label: "How It Works", href: "#how-it-works" },
+    { label: "Video Demo", href: "#video-demo" },
     { label: "Platform Walkthrough", href: "#walkthrough" },
     { label: "3B Sourcing", href: "#sourcing" },
     { label: "ATS & Boards", href: "#ats-integrations" },
-    { label: "ROI Calculator", href: "#roi-calculator" },
+    { label: "ROI Plans", href: "#roi-calculator" },
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -27,34 +28,15 @@ export const Navbar: React.FC<Props> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-8">
           {/* Zone 1: Brand Wordmark & Signature Logo */}
-
-          <a href="#" className="flex items-center gap-2.5 shrink-0 group">
+          <a 
+            href="#" 
+            className="flex items-center gap-2.5 shrink-0 group whitespace-nowrap"
+          >
             <img
               src={logo}
               alt="CandidHR.ai Logo"
               className="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform object-contain"
             />
-
-            {/* <svg
-              className="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="navLogoGradA" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#6C5CFF" />
-                  <stop offset="100%" stopColor="#3D38F5" />
-                </linearGradient>
-                <linearGradient id="navLogoGradB" x1="1" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#9F96FF" />
-                  <stop offset="100%" stopColor="#3D38F5" />
-                </linearGradient>
-              </defs>
-              <rect width="32" height="32" rx="8" fill="#161C42" />
-              <path d="M6 5h6.5L26 27h-6.5L6 5z" fill="url(#navLogoGradA)" />
-              <path d="M26 5h-6.5L6 27h6.5L26 5z" fill="url(#navLogoGradB)" opacity="0.92" />
-            </svg> */}
             <div className="flex items-baseline gap-1">
               <span className="font-heading font-extrabold text-xl text-white tracking-tight">
                 CandidHR<span className="text-[#6C5CFF]">.ai</span>
@@ -75,21 +57,14 @@ export const Navbar: React.FC<Props> = ({
             ))}
           </div>
 
-          {/* Zone 3: Primary Actions */}
+          {/* Zone 3: Primary Action */}
           <div className="hidden sm:flex items-center gap-3 shrink-0">
-            {/* <button
-              onClick={onOpenScreeningSimulator}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl transition-all cursor-pointer whitespace-nowrap"
-            >
-              <Play className="w-3.5 h-3.5 text-[#9F96FF]" />
-              Live Demo
-            </button> */}
             <button
               onClick={onOpenDemo}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-brand-gradient hover:opacity-95 shadow-lg shadow-[#3D38F5]/30 rounded-xl transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-brand-gradient hover:opacity-95 shadow-lg shadow-[#3D38F5]/30 rounded-xl transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap shrink-0"
             >
               <Calendar className="w-3.5 h-3.5" />
-              Book a Demo
+              <span>Book a Demo</span>
             </button>
           </div>
 
@@ -132,16 +107,6 @@ export const Navbar: React.FC<Props> = ({
             ))}
           </div>
           <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenScreeningSimulator();
-              }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-slate-200 bg-white/5 border border-white/15 rounded-xl"
-            >
-              <Play className="w-4 h-4 text-[#9F96FF]" />
-              Test AI Screening Live
-            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

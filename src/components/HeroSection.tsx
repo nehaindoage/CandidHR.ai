@@ -76,15 +76,21 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
     }
   ];
 
-  // State to track image fallback if CDN fails
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   const handleImageError = (name: string) => {
     setFailedImages(prev => ({ ...prev, [name]: true }));
   };
 
+  const scrollToVideo = () => {
+    const el = document.getElementById('video-demo');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative bg-navy-glow pt-10 pb-14 overflow-hidden text-slate-100">
+    <section className="relative bg-navy-glow pt-8 sm:pt-12 pb-14 overflow-hidden text-slate-100">
       {/* Decorative ambient blurred gradients */}
       <div className="absolute top-1/4 right-5 w-96 h-96 bg-[#6C5CFF]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-5 w-80 h-80 bg-[#3D38F5]/15 rounded-full blur-3xl pointer-events-none" />
@@ -100,11 +106,11 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
         </div>
 
         {/* 2-Column Split Hero */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Column: Provocative Headline & Value Proposition */}
           <div className="lg:col-span-7 space-y-6">
-            <h1 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-[1.08] tracking-tight text-white text-balance">
+            <h1 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[52px] leading-[1.08] tracking-tight text-white">
               STOP SCREENING RESUMES.{' '}
               <span className="text-brand-gradient block mt-1">
                 START MEETING YOUR BEST CANDIDATES.
@@ -112,13 +118,13 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              CandidHR.ai auto-invites best matches from a <strong className="text-white font-semibold">3B talent pool</strong>, 
+              CandidHR.ai auto-invites top matches from a <strong className="text-white font-semibold">3B talent pool</strong>, 
               screens resumes against the job description, and conducts role-relevant assessments &amp; video interviews — 
-              so recruiters spend their time on the people <span className="text-white font-semibold underline decoration-[#6C5CFF] underline-offset-4">worth interviewing</span>.
+              so recruiters spend time only on people <span className="text-white font-semibold underline decoration-[#6C5CFF] underline-offset-4">worth interviewing</span>.
             </p>
 
             {/* CTA Action Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={onOpenDemo}
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm sm:text-base font-bold text-white bg-brand-gradient hover:bg-brand-gradient-hover shadow-xl shadow-[#3D38F5]/40 rounded-xl transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
@@ -127,13 +133,13 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              {/* <button
-                onClick={onOpenScreeningSimulator}
+              <button
+                onClick={scrollToVideo}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/20 rounded-xl transition-all cursor-pointer whitespace-nowrap"
               >
                 <Play className="w-4 h-4 text-[#9F96FF]" />
-                <span>Test AI Screening Live</span>
-              </button> */}
+                <span>Watch Real Walkthrough</span>
+              </button>
             </div>
 
             {/* Micro Trust Note */}
@@ -225,14 +231,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
 
         </div>
 
-        {/* =========================================================================
-            CLIENT-REQUESTED LOGO MARQUEE: WHITE RECTANGULAR CARDS ON DARK BACKDROP
-            Exact card style from Capture.PNG and user's specifications:
-            - White rounded card with border border-white/20
-            - Fixed dimensions ~210px x 115px
-            - Official logo centered with max-h-[75px] max-w-[180px] object-contain
-            - Smooth infinite loop marquee with hover-pause
-           ========================================================================= */}
+        {/* LOGO MARQUEE: WHITE RECTANGULAR CARDS ON DARK BACKDROP */}
         <div className="mt-16 pt-8 border-t border-white/10">
           <p className="text-center text-xs font-bold uppercase tracking-wider text-slate-300 mb-6 font-mono">
             Trusted by hiring teams and talent recruiters at
@@ -240,7 +239,6 @@ export const HeroSection: React.FC<Props> = ({ onOpenDemo, onOpenScreeningSimula
           
           <div className="relative overflow-hidden w-full py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
             <div className="animate-marquee-scroll flex items-center gap-6 whitespace-nowrap">
-              {/* Double sequence for infinite seamless loop */}
               {clientLogos.concat(clientLogos).map((logo, i) => (
                 <div
                   key={`${logo.name}-${i}`}
